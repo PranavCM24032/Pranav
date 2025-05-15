@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<head>
+  
+  <title>Python Web Tutorial - TechPlus</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Python Web Tutorial</h1>
+
+    <p>Welcome to the Python Web tutorial. This page is powered by Python (Flask).</p>
+
+    <h2>Example Code: "Hello, World!"</h2>
+    <div class="code-container">
+      <pre>
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+      </pre>
+    </div>
+
+    <h3>Explanation of the Python Code</h3>
+    <ul>
+      <li><strong>from flask import Flask, render_template</strong>: 
+          This line imports the Flask class and the render_template function from the flask module. Flask is the core framework to create web applications in Python, and render_template is used to render HTML templates.</li>
+      
+      <li><strong>app = Flask(__name__)</strong>: 
+          Here, we create an instance of the Flask class. The __name__ argument tells Flask to use the current file as the starting point for the application.</li>
+      
+      <li><strong>@app.route('/') </strong>: 
+          This decorator is used to specify the URL route. In this case, the root ("/") route is defined, which means that when the user visits the homepage, this function (`home()`) will be executed.</li>
+      
+      <li><strong>def home():</strong> 
+          This function will be executed when a user visits the root URL ("/"). The function will render an HTML template, which is `index.html` in this case.</li>
+      
+      <li><strong>return render_template('index.html')</strong>: 
+          This line tells Flask to render and return the HTML file `index.html` from the templates folder to the user.</li>
+      
+      <li><strong>if __name__ == '__main__':</strong> 
+          This conditional ensures that the Flask application runs only when the script is executed directly (and not when it's imported as a module into another script).</li>
+      
+      <li><strong>app.run(debug=True)</strong>: 
+          This line starts the Flask application and enables the debugging mode. When debug is set to `True`, Flask will automatically reload the server when you make changes to the code, and show detailed error messages in the browser.</li>
+    </ul>
+  </div>
+</body>
+</html>

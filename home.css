@@ -1,0 +1,340 @@
+ body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            color: #212529;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* --- Section Padding --- */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* --- Background Colors --- */
+        .bg-dark-section {
+            background-color: #212529;
+            color: white;
+        }
+
+        .bg-primary-section {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .bg-light-section {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+
+         .card-img-top {
+            height: 180px;
+            object-fit: cover;
+        }
+
+         .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+         .btn-light:hover {
+            background-color: #e2e6ea;
+            border-color: #e3e7ea;
+        }
+
+        /* --- Navbar Styling --- */
+        .navbar {
+            background-color: #343a40;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .container {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             padding: 0 15px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .navbar-brand span {
+            font-size: 1.75rem;
+            color: #007bff;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        .navbar-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 20px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #007bff;
+        }
+
+        .navbar-toggler {
+            display: none;
+        }
+
+        /* --- Hero Section Styling --- */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            background-image: linear-gradient(45deg, #007bff, #6f42c1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p.lead {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+        }
+
+        .hero .hero-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .hero .hero-actions h2 {
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .hero .hero-actions select {
+             padding: 8px 12px;
+             font-size: 1rem;
+             border-radius: .25rem;
+             border: 1px solid #ced4da;
+             width: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        .btn-light {
+            color: #212529;
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+
+        .btn-light:hover {
+            color: #212529;
+            background-color: #e2e6ea;
+            border-color: #e3e7ea;
+        }
+
+        .btn-primary {
+             color: #fff;
+             background-color: #007bff;
+             border-color: #007bff;
+        }
+
+         .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-lg {
+            padding: .5rem 1rem;
+            font-size: 1.25rem;
+            border-radius: .3rem;
+        }
+
+        /* --- Why Choose Us / Popular Courses / Testimonials General Styling --- */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: inherit;
+        }
+
+        /* --- Grid Layout for Features/Courses/Testimonials --- */
+        .grid-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+
+        .grid-col {
+            padding: 0 10px;
+            margin-bottom: 20px;
+            width: 100%; /* Default to full width */
+            box-sizing: border-box;
+        }
+
+        /* Fixed columns based on lg/md classes */
+        .grid-col-sm-12 { width: 100%; }
+        .grid-col-md-6 { width: 50%; }
+        .grid-col-md-4 { width: 33.33%; }
+        .grid-col-lg-4 { width: 33.33%; }
+        .grid-col-lg-3 { width: 25%; }
+
+
+         .grid-row.justify-content-center {
+             justify-content: center;
+         }
+
+
+        /* --- Feature Item Styling (Why Choose Us) --- */
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: .25rem;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+
+        /* --- Card Styling (Popular Courses / Testimonials) --- */
+        .card {
+            background-color: white;
+            border: 1px solid rgba(0,0,0,.125);
+            border-radius: .25rem;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-img-top {
+             width: 100%;
+             border-top-left-radius: calc(.25rem - 1px);
+             border-top-right-radius: calc(.25rem - 1px);
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            color: #6c757d;
+            margin-bottom: 15px;
+             flex-grow: 1;
+        }
+
+        /* --- Testimonial Specific Styling --- */
+        .testimonial-card {
+            border-left: 4px solid #007bff;
+        }
+
+        .testimonial-card .card-body {
+             padding-top: 0;
+             padding-bottom: 0;
+        }
+
+        .testimonial-card p {
+             font-style: italic;
+             color: #212529;
+             margin-bottom: 10px;
+        }
+
+        .testimonial-card footer {
+             text-align: right;
+             font-size: .875rem;
+             color: #007bff;
+             margin-top: 15px;
+        }
+
+
+        /* --- Footer Styling --- */
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: .9rem;
+        }
+
+    
