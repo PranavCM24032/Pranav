@@ -1,0 +1,195 @@
+#include <graphics.h>
+#include <conio.h>
+#include <dos.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+// Function Prototypes
+void drawStars();
+void drawLaunchPad(int);
+void drawRocket(int, int);
+void drawFlames(int, int);
+void drawSmoke(int, int);
+void countdown(int, int, int);
+
+// Draw stars
+void drawStars() {
+    int i, x, y;
+    for (i = 0; i < 50; i++) {
+        x = rand() % getmaxx();
+        y = rand() % (getmaxy() / 2);
+        putpixel(x, y, WHITE);
+    }
+}
+
+// Draw launch pad with only one support bar
+void drawLaunchPad(int groundY) {
+    int i;
+    setcolor(GREEN);
+    setfillstyle(SOLID_FILL, GREEN);
+    bar(0, groundY, getmaxx(), getmaxy());
+
+    setcolor(DARKGRAY);
+    setfillstyle(SOLID_FILL, DARKGRAY);
+    bar(260, groundY - 20, 380, groundY);
+
+    setcolor(LIGHTGRAY);
+    rectangle(250, groundY - 150, 260, groundY + 2);
+
+    for (i = 0; i <= 120; i += 20)
+        line(250, groundY - 150 + i, 260, groundY - 130 + i);
+}
+
+// Draw rocket with large joined thrusters
+void drawRocket(int x, int y) {
+    // Body
+    setcolor(WHITE);
+    rectangle(x, y, x + 40, y + 200);
+    setfillstyle(SOLID_FILL, LIGHTGRAY);
+    floodfill(x + 20, y + 100, WHITE);
+
+    // Nose cone
+    line(x, y, x + 20, y - 40);
+    line(x + 40, y, x + 20, y - 40);
+    setfillstyle(SOLID_FILL, WHITE);
+    floodfill(x + 20, y - 20, WHITE);
+
+    // Left big thruster
+    rectangle(x - 30, y + 110, x - 5, y + 200);
+    setfillstyle(SOLID_FILL, LIGHTGRAY);
+    floodfill(x - 15, y + 170, WHITE);
+
+    // Right big thruster
+    rectangle(x + 45, y + 110, x + 70, y + 200);
+    setfillstyle(SOLID_FILL, LIGHTGRAY);
+    floodfill(x + 55, y + 170, WHITE);
+
+    // Red bands
+    setcolor(RED);
+    setfillstyle(SOLID_FILL, RED);
+    bar(x, y + 50, x + 40, y + 60);
+    bar(x, y + 100, x + 40, y + 110);
+    bar(x - 30, y + 170, x - 5, y + 180);
+    bar(x + 45, y + 170, x + 70, y + 180);
+}
+
+// Draw flame effect
+void drawFlames(int x, int y) {
+    int i, fx, fy;
+    int colors[3] = {RED, YELLOW, LIGHTRED};
+    for (i = 0; i < 25; i++) {
+        setcolor(colors[rand() % 3]);
+        fx = x + 20 + rand() % 20 - 10;
+        fy = y + 200 + rand() % 30 + 10;
+        line(x + 20, y + 200, fx, fy);
+    }
+}
+
+// Draw smoke aligned with rocket center (white, red, orange)
+void drawSmoke(int x, int y) {
+    int i, sx, sy, radius;
+int color;
+    int colors[3] = {LIGHTGRAY, RED, BROWN};  // LIGHTGRAY = white, BROWN = orange
+
+    for (i = 0; i < 6; i++) {
+        sx = x + 20 + rand() % 60 - 30;  // Centered
+        sy = y + 220 + rand() % 80;
+        radius = rand() % 20 + 10;
+        color = colors[rand() % 3];  // Random color
+
+        setcolor(color);
+        setfillstyle(SOLID_FILL, color);
+        circle(sx, sy, radius);
+        floodfill(sx, sy, color);
+    }
+}
+
+// Countdown before launch
+void countdown(int rocketX, int rocketY, int groundY) {
+    int i;
+    char num[3];
+    for (i = 10; i >= 0; i--) {
+        cleardevice();
+        drawStars();
+        drawLaunchPad(groundY);
+        drawRocket(rocketX, rocketY);
+        drawSmoke(rocketX, rocketY);
+
+        settextstyle(TRIPLEX_FONT, HORIZ_DIR, 6);
+        setcolor(RED);
+        sprintf(num, "%d", i);
+        outtextxy(50, 100, num);  // Away from rocket
+
+        sound(1000);
+        delay(250);
+        nosound();
+        delay(250);
+    }
+}
+
+// Main program
+int main() {
+    int gd = DETECT, gm = DETECT;
+    int rocketX = 290;
+    int rocketY = 180;
+    int groundY = 400;
+    int i, currentY;
+
+    initgraph(&gd, &gm, "C:\\TURBOC3\\BGI");
+    srand(time(NULL));
+
+    // Initial screen
+    cleardevice();
+    settextstyle(TRIPLEX_FONT, HORIZ_DIR, 3);
+    setcolor(WHITE);
+    outtextxy(100, 200, "Press ENTER to Start Countdown");
+    while (getch() != 13);  // Wait for Enter key
+
+    countdown(rocketX, rocketY, groundY);
+
+    // Thruster sound effect
+    for (i = 0; i < 10; i++) {
+        sound(300 + i * 20);
+        delay(50);
+    }
+    nosound();
+
+    // Launch animation
+    for (i = 0; i < 450; i++) {
+        cleardevice();
+        currentY = rocketY - i;
+        drawStars();
+        drawLaunchPad(groundY);
+        drawRocket(rocketX, currentY);
+
+        if (currentY + 200 > -50) {
+            drawFlames(rocketX, currentY);
+            drawSmoke(rocketX, currentY);
+        }
+
+        delay(20);
+    }
+
+    // Mission complete screen
+    cleardevice();
+    settextstyle(TRIPLEX_FONT, HORIZ_DIR, 5);
+    setcolor(GREEN);
+    outtextxy(getmaxx() / 2 - 200, getmaxy() / 2 - 30, "Mission Successful!");
+
+    // Display names
+    settextstyle(TRIPLEX_FONT, HORIZ_DIR, 2);
+    setcolor(WHITE);
+    outtextxy(getmaxx() / 2 - 150, getmaxy() / 2 + 40, "Pranav Paunikar : CM24032");
+    outtextxy(getmaxx() / 2 - 150, getmaxy() / 2 + 80, "Prasad Hore    : CM24034");
+
+    // Celebration sound
+    sound(700); delay(200);
+    sound(900); delay(200);
+    sound(1100); delay(400);
+    nosound();
+
+    getch();
+    closegraph();
+    return 0;
+}
